@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import requests
 from tqdm import tqdm
 import json
+import string
 
 
 LINK = 4
@@ -154,7 +155,7 @@ mouser = Mouser()
 lcsc = Lcsc()
 
 #for each product:
-
+alphabet = list(string.ascii_uppercase)
 for i in tqdm(range(START, END+1)):
     # fetch link if available, check if bulk quantity is available
     link = sheet.cell(i, LINK).value
@@ -190,4 +191,6 @@ for i in tqdm(range(START, END+1)):
             sheet.update_cell(i, BULK_PRICE, bulk)
         sleep(1)
         sheet.update_cell(i, STOCK, stock)
+        if stock == "N/A":
+            sheet.format(f"{alphabet[STOCK-1]}{i}", {"backgroundColor": {"red": 0.9, "green": 0.72, "blue": 0.68}})
         sleep(1)
