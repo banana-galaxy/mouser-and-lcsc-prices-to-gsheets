@@ -18,6 +18,8 @@ STOCK = 12
 START = 4
 END = 74
 
+SHEET_NAME = "Copy of USA Kits Prices"
+
 
 class Mouser():
     def __init__(self):
@@ -145,7 +147,7 @@ class Lcsc():
 scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
 client = gspread.authorize(creds)
-sheet = client.open("Copy of USA Kits Prices").sheet1
+sheet = client.open(SHEET_NAME).sheet1
 
 # initialize classes
 mouser = Mouser()
